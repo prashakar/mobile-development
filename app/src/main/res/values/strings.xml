@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Mobile Labs</string>
+    <string name="greeting">Hello!\n\nSelect a lab to begin:</string>
+    <string name="lab3_greeting">Hi! Welcome to Lab 3 App</string>
+    <string name="about_btn">About</string>
+    <string name="lab3_btn">Lab 3</string>
+    <string name="lab4_btn">Lab 4</string>
+    <string name="lab5_btn">Lab 5</string>
+    <string name="close">Close</string>
+    <string name="terms_placeholder">TERMS OF SERVICE GOES HERE</string>
+    <string name="about_title">About</string>
+    <string name="company_name">Android Lab App Production</string>
+    <string name="about_msg">Hello this is a mobile app.</string>
+    <string name="terms_btn">Terms and Conditions</string>
+    <string name="lab4_msg">Swipe your notification menu down!</string>
+    <string name="login_btn">Login</string>
+    <string name="finish_btn">Finish</string>
+    <string name="username">Username:</string>
+    <string name="password">Password:</string>
+    <string name="about_greeting">This application is my solution for lab 3.\nCopyright Prashakar Prabagaran</string>
+</resources>
