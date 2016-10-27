@@ -6,6 +6,7 @@
     <string name="lab3_btn">Lab 3</string>
     <string name="lab4_btn">Lab 4</string>
     <string name="lab5_btn">Lab 5</string>
+    <string name="lab6_btn">Lab 6</string>
     <string name="close">Close</string>
     <string name="terms_placeholder">TERMS OF SERVICE GOES HERE</string>
     <string name="about_title">About</string>
@@ -15,6 +16,11 @@
     <string name="lab4_msg">Swipe your notification menu down!</string>
     <string name="login_btn">Login</string>
     <string name="finish_btn">Finish</string>
+    <string name="addContact_btn">Add Contact</string>
+    <string name="firstName_label">First Name: </string>
+    <string name="lastName_label">Last Name: </string>
+    <string name="phoneNumber_label">Phone Number: </string>
+    <string name="deleteContact_btn">Delete Contact</string>
     <string name="username">Username:</string>
     <string name="password">Password:</string>
     <string name="about_greeting">This application is my solution for lab 3.\nCopyright Prashakar Prabagaran</string>

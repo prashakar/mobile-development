@@ -33,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 Log.v("switch_activity","lab5");
                 break;
+            case "lab6":
+                intent = new Intent(this, Lab6Activity.class);
+                startActivity(intent);
+                Log.v("switch_activity","lab6");
+                break;
         }
 
     }
