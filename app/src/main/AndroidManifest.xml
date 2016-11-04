@@ -25,7 +25,8 @@
         <activity android:name=".Lab5Activity" />
         <activity android:name=".Lab6Activity" />
         <activity android:name=".ShowLicense" />
-        <activity android:name=".AddContact"></activity>
+        <activity android:name=".AddContact" />
+        <activity android:name=".DeleteContact"></activity>
     </application>
 
 </manifest>

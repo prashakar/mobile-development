@@ -1,22 +1,18 @@
 package com.example.prash.mobile_labs;
 
-import android.content.Intent;
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Lab6Activity extends AppCompatActivity {
@@ -28,24 +24,29 @@ public class Lab6Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lab6);
-        try{
-            System.out.println("reading file");
-            String filePath = this.getFilesDir().getPath().toString() + "/contactData.txt";
-            FileInputStream fileIn = new FileInputStream(filePath);
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            contactList = (ArrayList<Contact>)in.readObject();
-        }catch(IOException i){
-            i.printStackTrace();
-        }catch (ClassNotFoundException i){
-            i.printStackTrace();
-        }
+//        try{
+//            System.out.println("reading file oncreate");
+//            String filePath = getFilesDir().getPath().toString() + "/contactData.txt";
+//            FileInputStream fileIn = new FileInputStream(filePath);
+//            ObjectInputStream in = new ObjectInputStream(fileIn);
+//            contactList = (ArrayList<Contact>)in.readObject();
+//            UsersAdapter adapter = new UsersAdapter(this, contactList);
+//            ListView listview = (ListView) findViewById(R.id.lv);
+//            //ArrayAdapter arrayAdapter = new ArrayAdapter(this,R.layout.single_item,contactList );
+//            listview.setAdapter(adapter);
+//        }catch(IOException i){
+//            i.printStackTrace();
+//        }catch (ClassNotFoundException i){
+//            i.printStackTrace();
+//        }
+
     }
 
     @Override
     public void onStop() {
         super.onStop();
         try{
-            System.out.println("writing file");
+            System.out.println("writing file onstop");
             String filePath = this.getFilesDir().getPath().toString() + "/contactData.txt";
             System.out.println(filePath);
             FileOutputStream fileOut = new FileOutputStream(filePath);
@@ -62,11 +63,15 @@ public class Lab6Activity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         try{
-            System.out.println("reading file");
+            System.out.println("reading file onstart");
             String filePath = this.getFilesDir().getPath().toString() + "/contactData.txt";
             FileInputStream fileIn = new FileInputStream(filePath);
             ObjectInputStream in = new ObjectInputStream(fileIn);
             contactList = (ArrayList<Contact>)in.readObject();
+            UsersAdapter adapter = new UsersAdapter(this, contactList);
+            ListView listview = (ListView) findViewById(R.id.lv);
+            //ArrayAdapter arrayAdapter = new ArrayAdapter(this,R.layout.single_item,contactList );
+            listview.setAdapter(adapter);
         }catch(IOException i){
             i.printStackTrace();
         }catch (ClassNotFoundException i){
@@ -91,6 +96,27 @@ public class Lab6Activity extends AppCompatActivity {
 
                 //ArrayAdapter arrayAdapter = new ArrayAdapter(this,R.layout.single_item,contactList );
                 listview.setAdapter(adapter);
+                try{
+                    System.out.println("writing file onstop");
+                    String filePath = this.getFilesDir().getPath().toString() + "/contactData.txt";
+                    System.out.println(filePath);
+                    FileOutputStream fileOut = new FileOutputStream(filePath);
+                    ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                    out.writeObject(contactList);
+                    out.close();
+                    fileOut.close();
+                }catch(IOException i){
+                    i.printStackTrace();
+                }
+            }
+        } else if (requestCode == 2) {
+            if(resultCode == Activity.RESULT_OK){
+                Contact deleteContact = data.getSerializableExtra("selectedContact");
+                for(Contact contact: contactList){
+                    if(contact == deleteContact){
+                        contactList.remove(contact);
+                    }
+                }
             }
         }
     }
@@ -100,6 +126,11 @@ public class Lab6Activity extends AppCompatActivity {
         startActivityForResult(intent, 1);
     }
 
-
+    public void deleteContact (View button) {
+        Log.i("button_click", "add contact button");
+        Intent intent = new Intent(this, DeleteContact.class);
+        intent.putExtra("contacts",contactList);
+        startActivityForResult(intent, 2);
+    }
 }
 
