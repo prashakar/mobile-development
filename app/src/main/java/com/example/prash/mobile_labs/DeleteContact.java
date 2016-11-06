@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +19,8 @@ public class DeleteContact extends AppCompatActivity implements AdapterView.OnIt
 
     SpinnerAdapter spinnerAdapter;
     ArrayList<Contact> contacts;
-    int selectedContact;
+    Contact selectedContact;
+    int selectedContactId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +30,16 @@ public class DeleteContact extends AppCompatActivity implements AdapterView.OnIt
         Spinner spinner = (Spinner)findViewById(R.id.spinner);
         SpinnerAdapter spinnerAdapter = new SpinnerAdapter(this, contacts);
         spinnerAdapter.setDropDownViewResource(R.layout.single_item);
+        spinner.setOnItemSelectedListener(this);
         spinner.setAdapter(spinnerAdapter);
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        selectedContact = Contact.getId();
+        selectedContact = (Contact)parent.getItemAtPosition(position);
+        selectedContactId = selectedContact.getId();
+        System.out.println(selectedContactId);
+
     }
 
     @Override
@@ -45,7 +49,7 @@ public class DeleteContact extends AppCompatActivity implements AdapterView.OnIt
 
     public void deleteContact(View v){
         Intent returnIntent = new Intent();
-        returnIntent.putExtra("selectedContact", (Parcelable) selectedContact);
+        returnIntent.putExtra("selectedContact", selectedContactId);
         setResult(Activity.RESULT_OK, returnIntent);
         finish();
     }

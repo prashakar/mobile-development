@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class Lab6Activity extends AppCompatActivity {
 
     public ArrayList<Contact> contactList = new ArrayList<Contact>();
-    private int id = 1;
+    private int id = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class Lab6Activity extends AppCompatActivity {
         super.onStop();
         try{
             System.out.println("writing file onstop");
-            String filePath = this.getFilesDir().getPath().toString() + "/contactData.txt";
+            String filePath = this.getFilesDir().getPath().toString() + "/contactData6.txt";
             System.out.println(filePath);
             FileOutputStream fileOut = new FileOutputStream(filePath);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -64,10 +64,16 @@ public class Lab6Activity extends AppCompatActivity {
         super.onStart();
         try{
             System.out.println("reading file onstart");
-            String filePath = this.getFilesDir().getPath().toString() + "/contactData.txt";
+            String filePath = this.getFilesDir().getPath().toString() + "/contactData6.txt";
             FileInputStream fileIn = new FileInputStream(filePath);
             ObjectInputStream in = new ObjectInputStream(fileIn);
             contactList = (ArrayList<Contact>)in.readObject();
+            if (!contactList.isEmpty()) {
+                id = contactList.get(contactList.size() - 1).getId() + 1;
+            } else {
+                id = 0;
+            }
+            System.out.println("ON INDEX " + id);
             UsersAdapter adapter = new UsersAdapter(this, contactList);
             ListView listview = (ListView) findViewById(R.id.lv);
             //ArrayAdapter arrayAdapter = new ArrayAdapter(this,R.layout.single_item,contactList );
@@ -89,7 +95,7 @@ public class Lab6Activity extends AppCompatActivity {
                 String phoneNumber = data.getStringExtra("phoneNumber");
                 Contact contact = new Contact(id, firstName, lastName, phoneNumber);
                 contactList.add(contact);
-                id+=1;
+                //id+=1;
                 System.out.println(contactList);
                 ListView listview = (ListView) findViewById(R.id.lv);
                 UsersAdapter adapter = new UsersAdapter(this, contactList);
@@ -98,7 +104,7 @@ public class Lab6Activity extends AppCompatActivity {
                 listview.setAdapter(adapter);
                 try{
                     System.out.println("writing file onstop");
-                    String filePath = this.getFilesDir().getPath().toString() + "/contactData.txt";
+                    String filePath = this.getFilesDir().getPath().toString() + "/contactData6.txt";
                     System.out.println(filePath);
                     FileOutputStream fileOut = new FileOutputStream(filePath);
                     ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -110,12 +116,33 @@ public class Lab6Activity extends AppCompatActivity {
                 }
             }
         } else if (requestCode == 2) {
-            if(resultCode == Activity.RESULT_OK){
-                Contact deleteContact = data.getSerializableExtra("selectedContact");
-                for(Contact contact: contactList){
-                    if(contact == deleteContact){
+            if (resultCode == Activity.RESULT_OK) {
+                int deleteContact = data.getIntExtra("selectedContact", -1);
+                System.out.println("deleting " + deleteContact);
+                for (Contact contact : contactList) {
+                    if (contact.getId() == deleteContact) {
+                        System.out.println("DELETED " + deleteContact);
+                        System.out.println(contactList.size());
                         contactList.remove(contact);
+                        System.out.println(contactList.size());
+                        break;
                     }
+                }
+                UsersAdapter adapter = new UsersAdapter(this, contactList);
+                ListView listview = (ListView) findViewById(R.id.lv);
+                //ArrayAdapter arrayAdapter = new ArrayAdapter(this,R.layout.single_item,contactList );
+                listview.setAdapter(adapter);
+                try{
+                    System.out.println("writing file onDeleteReturn");
+                    String filePath = this.getFilesDir().getPath().toString() + "/contactData6.txt";
+                    System.out.println(filePath);
+                    FileOutputStream fileOut = new FileOutputStream(filePath);
+                    ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                    out.writeObject(contactList);
+                    out.close();
+                    fileOut.close();
+                }catch(IOException i){
+                    i.printStackTrace();
                 }
             }
         }
