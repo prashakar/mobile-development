@@ -19,7 +19,7 @@ public class GradesAdapter extends ArrayAdapter<Grade> {
         Grade grade = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.single_item, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.single_item_grades, parent, false);
         }
         // Lookup view for data population
         TextView studentId = (TextView) convertView.findViewById(R.id.studentId);
@@ -27,9 +27,9 @@ public class GradesAdapter extends ArrayAdapter<Grade> {
         TextView mark = (TextView) convertView.findViewById(R.id.mark);
 
         // Populate the data into the template view using the data object
-        studentId.setText(toString().valueOf(grade.studentId));
+        studentId.setText(String.valueOf(grade.studentId));
         courseComponent.setText(grade.courseComponent);
-        mark.setText(toString().valueOf(grade.mark));
+        mark.setText(String.valueOf(grade.mark));
 
         // Return the completed view to render on screen
         return convertView;

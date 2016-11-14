@@ -3,8 +3,10 @@ package com.example.prash.mobile_labs;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -13,6 +15,8 @@ import java.util.ArrayList;
  */
 
 public class GradesDBHelper extends SQLiteOpenHelper {
+
+    private Context context;
 
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_FILENAME = "grades.db";
@@ -28,6 +32,7 @@ public class GradesDBHelper extends SQLiteOpenHelper {
 
     public GradesDBHelper(Context context) {
         super(context, DATABASE_FILENAME, null, DATABASE_VERSION);
+        this.context = context;
     }
 
     @Override
@@ -74,9 +79,14 @@ public class GradesDBHelper extends SQLiteOpenHelper {
         values.put("studentId", studentId);
         values.put("courseComponent", courseComponent);
         values.put("mark", mark);
-        db.insert("grades", null, values);
+        db.insertOrThrow("grades", null, values);
 
         Grade grade = new Grade(studentId, courseComponent, mark);
         return grade;
+    }
+
+    public void deleteGrade(int studentId){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete("grades", "studentId = ?", new String[]{""+studentId});
     }
 }

@@ -28,7 +28,8 @@
         <activity android:name=".AddContact" />
         <activity android:name=".DeleteContact" />
         <activity android:name=".Lab7Activity" />
-        <activity android:name=".AddGrade"></activity>
+        <activity android:name=".AddGrade" />
+        <activity android:name=".DeleteGrade"></activity>
     </application>
 
 </manifest>
