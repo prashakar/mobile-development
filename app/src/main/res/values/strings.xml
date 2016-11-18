@@ -8,6 +8,7 @@
     <string name="lab5_btn">Lab 5</string>
     <string name="lab6_btn">Lab 6</string>
     <string name="lab7_btn">Lab 7</string>
+    <string name="lab8_btn">Lab 8</string>
     <string name="close">Close</string>
     <string name="terms_placeholder">TERMS OF SERVICE GOES HERE</string>
     <string name="about_title">About</string>
@@ -30,4 +31,6 @@
     <string name="username">Username:</string>
     <string name="password">Password:</string>
     <string name="about_greeting">This application is my solution for lab 3.\nCopyright Prashakar Prabagaran</string>
+    <string name="location_disable">:(\n\nLocation is needed to use this feature.\n\n
+        Your location will be used to pin-point your location and nothing else!</string>
 </resources>
