@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="fileNames">
+        <item>small.mp4</item>
+        <item>audio.mp3</item>
+        <item>instrument.mp3</item>
+    </array>
+</resources>

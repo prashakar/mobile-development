@@ -1,10 +1,10 @@
 package com.example.prash.mobile_labs;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.util.Log;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,6 +52,11 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(this, Lab9MapsActivity.class);
                 startActivity(intent);
                 Log.v("switch_activity","lab9");
+                break;
+            case "lab10":
+                intent = new Intent(this, Lab10Activity.class);
+                startActivity(intent);
+                Log.v("switch_activity","lab10");
                 break;
         }
 

@@ -48,7 +48,8 @@
 
         <activity
             android:name=".Lab9MapsActivity"
-            android:label="@string/title_activity_lab9_maps"/>
+            android:label="@string/title_activity_lab9_maps" />
+        <activity android:name=".Lab10Activity"></activity>
     </application>
 
 </manifest>
